@@ -1,3 +1,15 @@
-import{useState}from'react';import{useJsonFetch}from'./hooks/useJsonFetch';import'./App.css';type Payload=unknown;const OK='https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/hooks-context/use-effect/data/users.json';const FAIL='https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/hooks-context/use-effect/data/missing.json';
-function Viewer({title,url,delay=0}:{title:string;url:string;delay?:number}){const[data,loading,error]=useJsonFetch<Payload>(url,undefined,delay);return <article><h2>{title}</h2>{loading&&<div className="loading"><span/>Загрузка…</div>}{error&&<div className="error">{error.message}</div>}{data!==null&&<pre>{JSON.stringify(data,null,2)}</pre>}</article>}
-export default function App(){const[showLoading,setShowLoading]=useState(false);return <main><header><span>Custom React Hook</span><h1>useJsonFetch</h1><p>Универсальная обработка data, loading и error</p></header><section><Viewer title="Успешный запрос" url={OK}/><Viewer title="Запрос с ошибкой" url={FAIL}/><article><h2>Состояние загрузки</h2>{showLoading?<Viewer title="Запрос выполняется минимум 3 секунды" url={OK} delay={3000}/>:<button onClick={()=>setShowLoading(true)}>Запустить медленный запрос</button>}</article></section></main>}
+import { RequestExamples } from "./components/RequestExamples";
+import "./App.css";
+
+export default function App() {
+  return (
+    <main>
+      <header>
+        <span>Custom React Hook</span>
+        <h1>useJsonFetch</h1>
+        <p>Универсальная обработка data, loading и error</p>
+      </header>
+      <RequestExamples />
+    </main>
+  );
+}
